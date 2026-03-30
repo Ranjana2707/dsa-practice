@@ -1,0 +1,75 @@
+/*
+Problem: Intersection of Two Arrays
+Platform: LeetCode
+Link: https://leetcode.com/problems/intersection-of-two-arrays/
+
+Difficulty: Easy
+Topics: Array, HashSet
+
+--------------------------------------------------
+
+Approach (Using HashSet):
+- Store all elements of nums1 in a HashSet.
+- Traverse nums2:
+    → If element exists in set1, add it to resultSet.
+- Use another HashSet to avoid duplicates.
+- Convert resultSet into array.
+
+--------------------------------------------------
+
+Why this works:
+- HashSet provides O(1) lookup.
+- Automatically removes duplicates.
+- Efficient compared to nested loops.
+
+--------------------------------------------------
+
+Time Complexity: O(n + m)
+Space Complexity: O(n)
+
+--------------------------------------------------
+*/
+
+import java.util.*;
+
+public class IntersectionOfArrays {
+
+    public int[] intersection(int[] nums1, int[] nums2) {
+
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> resultSet = new HashSet<>();
+
+        // Store elements of nums1
+        for (int num : nums1) {
+            set1.add(num);
+        }
+
+        // Find common elements
+        for (int num : nums2) {
+            if (set1.contains(num)) {
+                resultSet.add(num);
+            }
+        }
+
+        // Convert set to array
+        int[] result = new int[resultSet.size()];
+        int i = 0;
+
+        for (int num : resultSet) {
+            result[i++] = num;
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        IntersectionOfArrays obj = new IntersectionOfArrays();
+
+        int[] nums1 = {1, 2, 2, 1};
+        int[] nums2 = {2, 2};
+
+        int[] result = obj.intersection(nums1, nums2);
+
+        System.out.println(Arrays.toString(result)); // Output: [2]
+    }
+}
